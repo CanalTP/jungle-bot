@@ -1,20 +1,22 @@
-module.exports = {
-    getReply: function(messageBody, target, generator) {
+import R from 'ramda';
+
+export default {
+    getReply: function(messageBody, requesterMessage) {
         const reply = {
             '@context': 'https://www.w3.org/ns/activitystreams',
             'type': 'Create',
             'generator': {
-                'id': 'f6e92eb6-f69e-4eae-8158-06613461cf3a',
+                'id': R.path(['generator', 'id'], requesterMessage),
                 'type': 'Service',
-                'name': generator.name
+                'name': R.path(['generator', 'name'], requesterMessage)
             },
             'object': {
                 'type': 'Note',
                 'content': messageBody
             },
             'to': {
-                'type': 'Group',
-                'id': target.id
+                'type': R.path(['target', 'type'], requesterMessage),
+                'id': R.path(['target', 'id'], requesterMessage)
             }
         }
 
