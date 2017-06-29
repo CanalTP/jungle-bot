@@ -1,0 +1,32 @@
+{
+  "name": "jungle-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CanalTP/jungle-bot.git"
+  },
+  "keywords": [
+    "chatbot",
+    "bot",
+    "journey",
+    "navitia"
+  ],
+  "author": "Kisio Digital",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CanalTP/jungle-bot/issues"
+  },
+  "homepage": "https://github.com/CanalTP/jungle-bot#readme",
+  "dependencies": {
+    "@broid/messenger": "^2.0.1",
+    "@broid/slack": "^2.0.1",
+    "broid-slack": "^1.1.4",
+    "ramda": "^0.24.1",
+    "rxjs": "^5.4.1"
+  }
+}
