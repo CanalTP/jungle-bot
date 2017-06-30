@@ -5,9 +5,12 @@ import MessageBuilder from './MessageBuilder';
 import Navitia from './lib/navitia';
 import Router from './router';
 
+import LastDeparture from './features/LastDeparture';
+import NextDepartures from './features/NextDepartures';
+
 const clients = {
     slack: new BroidSlack({
-        token: 'xoxb-204765474528-HDKk3k8Sc1e7287XsKQPccjr',
+        token: 'xoxb-204765474528-A5mvMJXAgrpPS8EM8ScoPT3c',
         http: {
             host: '127.0.0.1',
             port: 8080,
@@ -39,36 +42,38 @@ Rx.Observable.merge(...R.map(client => client.listen(), R.values(clients))).subs
         const generatorName = R.path(['generator', 'name'], message);
 
         if (messageType === 'Note' && senderType === 'Person') {
-            const navitia = new Navitia('5c60fc34-e017-4c9e-9744-13515c6436d8');
+            LastDeparture.getLastDeparture(messageBody, (departureTime) => {
+                const reply = MessageBuilder.getReply(":steam_locomotive: Faudra pas se louper, le dernier départ vers " + place.name + " est à :clock5: " + lastDeparture, message);
+                clients[generatorName].send(reply)
+                    .then(console.log)
+                    .catch(console.error);
+            }, (noDepartureForPlace) => {
+                const reply = MessageBuilder.getReply("Désolé, y a plus aucun train pour " + noDepartureForPlace, message);
+                clients[generatorName].send(reply)
+                    .then(console.log)
+                    .catch(console.error);
+            }, (placeNotFound) => {
+                const reply = MessageBuilder.getReply("Désolé je connais pas " + placeNotFound, message);
+                clients[generatorName].send(reply)
+                    .then(console.log)
+                    .catch(console.error);
+            });
 
-            Router('Dernier départ vers (.*)', messageBody, (destination) => {
-                navitia.getFirstPlace(destination)
-                    .then(place => {
-                        let date = new Date();
-                        if (date.getHours() > 5) {
-                            date.setDate(date.getDate() + 1);
-                        }
-                        date.setHours(5);
-                        date.setMinutes(0);
-                        date.setSeconds(0);
-                        navitia.getJourneys('stop_area:OIF:SA:8768600', place.id, date)
-                            .then(results => {
-                                const lastDeparture = formatDatetime(results.journeys[0].departure_date_time);
-                                const reply = MessageBuilder.getReply(":steam_locomotive: Faudra pas se louper, le dernier départ vers " + place.name + " est à :clock5: " + lastDeparture, message);
-                                clients[generatorName].send(reply)
-                                    .then(console.log)
-                                    .catch(console.error);
-                            })
-                            .catch(result => {
-                                console.log("No result bitch !!");
-                            });
-                    })
-                    .catch(result => {
-                        const reply = MessageBuilder.getReply("Désolé je connais pas " + destination, message);
-                        clients[generatorName].send(reply)
-                            .then(console.log)
-                            .catch(console.error);
-                    });
+            NextDepartures.getNextDepartures(messageBody, (nextDepartures) => {
+                const reply = MessageBuilder.getReply(nextDepartures, message);
+                clients[generatorName].send(reply)
+                    .then(console.log)
+                    .catch(console.error);
+            }, (noScheduleForPlace) => {
+                const reply = MessageBuilder.getReply(`Aucun horaire trouvé pour l'arrêt ${noScheduleForPlace}`, message);
+                clients[generatorName].send(reply)
+                    .then(console.log)
+                    .catch(console.error);
+            }, (placeNotFound) => {
+                const reply = MessageBuilder.getReply(`Désolé je connais pas ${placeNotFound}`, message);
+                clients[generatorName].send(reply)
+                    .then(console.log)
+                    .catch(console.error);
             });
         }
     },
