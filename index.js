@@ -3,7 +3,7 @@ import R from 'ramda';
 import BroidSlack from 'broid-slack';
 import MessageBuilder from './MessageBuilder';
 import Navitia from './lib/navitia';
-import Router from './router/router';
+import Router from './router';
 
 const clients = {
     slack: new BroidSlack({
