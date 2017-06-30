@@ -4,12 +4,13 @@ import Isochron from './features/Isochron';
 import MessageBuilder from "./lib/output/MessageBuilder";
 import R from "ramda";
 import {clients} from './lib/clients';
+import Journeys from "./features/Journeys";
 
 export default {
-    lastDeparture: (message, destination) => {
+    lastDeparture: (message, origin, destination) => {
         const messageBuilder = new MessageBuilder(message);
 
-        LastDeparture.getLastDeparture(message, destination, (reply) => {
+        LastDeparture.getLastDeparture(message, origin, destination, (reply) => {
             sendMessage(message, reply);
         }, (noDepartureForPlace) => {
             const reply = messageBuilder.getReply(`Désolé, y a plus aucun train pour ${noDepartureForPlace}`);
@@ -36,6 +37,19 @@ export default {
         const messageBuilder = new MessageBuilder(message);
 
         Isochron.getIsochronAsciiArt(message, origin, duration, (reply) => {
+            sendMessage(message, reply);
+        });
+    },
+    journeys: (message, origin, destination) => {
+        const messageBuilder = new MessageBuilder(message);
+
+        Journeys.getJourneys(message, origin, destination, (reply) => {
+            sendMessage(message, reply);
+        }, (noJourneysOrigin, noJourneysDestination) => {
+            const reply = messageBuilder.getReply(`Aucun itineraire trouvé entre ${noJourneysOrigin} et ${noJourneysDestination}`);
+            sendMessage(message, reply);
+        }, (placeNotFound) => {
+            const reply = messageBuilder.getReply(`Désolé je connais pas ${placeNotFound}`);
             sendMessage(message, reply);
         });
     }

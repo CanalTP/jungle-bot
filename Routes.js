@@ -22,6 +22,13 @@ export default {
                 Features.isochron(message, origin, duration);
             });
         }
+    },
+    journeys: {
+        execute: (message) => {
+            Router('iti de (.*)? vers (.*)', message.object.content, (origin, destination) => {
+                Features.journeys(message, origin, destination);
+            });
+        }
     }
 }
     
