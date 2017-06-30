@@ -16,17 +16,6 @@ const clients = {
     })
 };
 
-let formatDatetime = function(datetime) {
-    if (typeof datetime !== 'string') { return 'none'; }
-    var formated = datetime.replace(/(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/,
-                                    '$4:$5');
-    if (formated.slice(-2) === '00') {
-        return formated.slice(0, -3);
-    } else {
-        return formated;
-    }
-};
-
 Rx.Observable.merge(...R.map(client => client.connect(), R.values(clients))).subscribe({
     next: data => console.log(JSON.stringify(data, null, 2)),
     error: err => console.error(`Something went wrong: ${err.message}`),

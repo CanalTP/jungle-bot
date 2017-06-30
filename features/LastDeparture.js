@@ -30,3 +30,14 @@ export default {
         });
     }
 }
+
+function formatDatetime(datetime) {
+    if (typeof datetime !== 'string') { return 'none'; }
+    var formated = datetime.replace(/(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/,
+                                    '$4:$5');
+    if (formated.slice(-2) === '00') {
+        return formated.slice(0, -3);
+    } else {
+        return formated;
+    }
+};

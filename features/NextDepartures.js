@@ -36,6 +36,7 @@ export default {
                             hasNextDeparturesCallback(replyMessage);
                         })
                         .catch(result => {
+                            console.log(result);
                             noScheduleCallback(place.name);
                         });
                 })
@@ -65,3 +66,14 @@ function getPicto(physical_mode) {
             return ':bike:';
     }
 }
+
+function formatDatetime(datetime) {
+    if (typeof datetime !== 'string') { return 'none'; }
+    var formated = datetime.replace(/(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/,
+                                    '$4:$5');
+    if (formated.slice(-2) === '00') {
+        return formated.slice(0, -3);
+    } else {
+        return formated;
+    }
+};
