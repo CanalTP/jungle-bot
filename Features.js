@@ -1,5 +1,6 @@
 import LastDeparture from './features/LastDeparture';
 import NextDepartures from './features/NextDepartures';
+import Isochron from './features/Isochron';
 import MessageBuilder from "./lib/output/MessageBuilder";
 import R from "ramda";
 import {clients} from './lib/clients';
@@ -28,6 +29,13 @@ export default {
             sendMessage(message, reply);
         }, (placeNotFound) => {
             const reply = messageBuilder.getReply(`Désolé je connais pas ${placeNotFound}`);
+            sendMessage(message, reply);
+        });
+    },
+    isochron: (message, origin, duration) => {
+        const messageBuilder = new MessageBuilder(message);
+
+        Isochron.getIsochronAsciiArt(message, origin, duration, (reply) => {
             sendMessage(message, reply);
         });
     }

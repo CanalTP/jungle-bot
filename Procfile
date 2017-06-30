@@ -1,1 +1,1 @@
-web: ./node_modules/babel-cli/bin/babel-node index.js
+worker: npm start
