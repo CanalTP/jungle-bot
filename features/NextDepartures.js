@@ -1,0 +1,67 @@
+import Navitia from '../lib/navitia';
+import Router from '../router/router';
+
+const navitia = new Navitia('5c60fc34-e017-4c9e-9744-13515c6436d8');
+
+export default {
+    getNextDepartures: (messageBody, hasNextDeparturesCallback, noScheduleCallback, placeNotFoundCallback) => {
+        Router('prochain(?:s)? (.*)? (?:de|à|pour) (.*)', messageBody, (type, origin) => {
+            console.log("type", type);
+            console.log("origin", origin);
+
+            if (type.match(new RegExp('train(s)?|rer', 'gi'))) {
+                physical_modes.push('physical_mode:Train', 'physical_mode:RapidTransit');
+            }
+            if (type.match(new RegExp('métro(s)?', 'gi'))) {
+                physical_modes.push('physical_mode:Metro');
+            }
+            if (type.match(new RegExp('bus', 'gi'))) {
+                physical_modes.push('physical_mode:Bus');
+            }
+
+            navitia.getFirstPlace(origin, ["stop_area"])
+                .then(place => {
+                    navitia.getDepartures(place.id)
+                        .then(departuresResponse => {
+                            let replyMessage = `Prochains passages à ${place.name}\n`;
+                            departuresResponse.departures.forEach(departure => {
+                                let physical_mode;
+                                departure.links.forEach(link => {
+                                    if (link.type == 'physical_mode') {
+                                        physical_mode = link.id;
+                                    }
+                                });
+                                replyMessage += `${formatDatetime(departure.stop_date_time.departure_date_time)} - ${getPicto(physical_mode)} \`${departure.display_informations.code}\` en direction de ${departure.display_informations.direction}\n`;
+                            });
+                            hasNextDeparturesCallback(replyMessage);
+                        })
+                        .catch(result => {
+                            noScheduleCallback(place.name);
+                        });
+                })
+                .catch(result => {
+                    placeNotFoundCallback(origin);
+                });
+        });
+    }
+}
+
+function getPicto(physical_mode) {
+    switch (physical_mode) {
+        case 'physical_mode:Bus':
+            return ':bus:';
+        case 'physical_mode:Metro':
+            return ':metro:';
+        case 'physical_mode:Train':
+            return ':steam_locomotive:';
+        case 'physical_mode:RapidTransit':
+            return ':light_rail:';
+        case 'physical_mode:Tramway':
+            return ':tram:';
+        case 'physical_mode:Car':
+            return ':car:';
+        case 'physical_mode:Bike':
+        case 'physical_mode:BikeSharingService':
+            return ':bike:';
+    }
+}
