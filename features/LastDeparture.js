@@ -18,7 +18,7 @@ export default {
                 date.setHours(5);
                 date.setMinutes(0);
                 date.setSeconds(0);
-                navitia.getJourneys(originPlace.id, destinationPlace.id, date)
+                navitia.getJourneys(originPlace.id, destinationPlace.id, date, 'arrival')
                     .then(journeysResponse => {
                         const builder = new LastDeparturesMessageBuilder(message);
                         const reply = builder.getReplyFromNavitia(destinationPlace, journeysResponse);
