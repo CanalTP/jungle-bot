@@ -4,13 +4,11 @@ export const Router = (message) => {
   if (isRouteMatching(LastDepartureBaseRoute, message)) {
     return LastDeparture(message);
   }
-
-  return '-------------';
 };
 
 export const isRouteMatching = (regex, message) => {
   const regexp = new RegExp(regex, 'gi');
-
+// console.log(regexp);
   return regexp.test(message);
 };
 

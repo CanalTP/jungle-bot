@@ -11,8 +11,8 @@ export const LastDeparture = (message) => {
   if (isRouteMatching('(?: depuis | de | en partant de )', message)) {
 
     const origin = extractOriginPoint(message);
+    console.log(origin);
   }
-  return 'end';
 };
 
 const extractDestinationPoint = (message) => {
@@ -29,14 +29,19 @@ const extractDestinationPoint = (message) => {
 };
 
 const extractOriginPoint = (message) => {
-  const originParamRaw1 = getRouteParameters('(?: depuis| de| en partant de) (.*)\w*(?:pour |a destination de |vers |$)', message);
-  console.log(originParamRaw1[1]);
+  let originParamTemp = getRouteParameters('(?: depuis| de| en partant de) (.*?)\w*(?:pour |a destination de |vers |$)', message);
+  let originParam = originParamTemp[1];
 
-  if (isRouteMatching('(?:pour |a destination de |vers )')) {
-    const originParam = getRouteParameters('(.*)\w*(?:pour |a destination de |vers |$)', originParamRaw1);
-    console.log(originParam[1]);
+  // cas particulier : on repasse parce que ... voila quoi
+  if (isRouteMatching(' en partant de ', originParam)) {
+    const originParamTemp = getRouteParameters('(?: en partant de) (.*?)\w*(?:pour |a destination de |vers |$)', originParam);
+    originParam = originParamTemp[1];
   }
 
+  if (isRouteMatching('(?:pour |a destination de |vers )', originParam)) {
+    const originParamTemp = getRouteParameters('(.*)\w*(?:pour |a destination de |vers |$)', originParam);
+    originParam = originParamTemp[1];
+  }
 
-
+  return originParam;
 };
