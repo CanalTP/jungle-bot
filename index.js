@@ -63,7 +63,7 @@ Rx.Observable.merge(...R.map(client => client.listen(), R.values(clients))).subs
                     .then(console.log)
                     .catch(console.error);
             }, (noScheduleForPlace) => {
-                const reply = MessageBuilder.getReply(`Aucun horaire trouvé pour l'arrêt ${noScheduleForPlace.name}`, message);
+                const reply = MessageBuilder.getReply(`Aucun horaire trouvé pour l'arrêt ${noScheduleForPlace}`, message);
                 clients[generatorName].send(reply)
                     .then(console.log)
                     .catch(console.error);
