@@ -1,10 +1,10 @@
 # jungle-bot
 Robot that can compute journey just for you
 
-## Add yout Slack token
-create a file with this content
+## Add your Slack token
 
 lib/token.js 
 ```
-export let token = 'xoxb-YOUR-TOKEN-FROM-SLACK';
+export let token = process.env.TOKEN || 'xoxb-YOUR-TOKEN-FROM-SLAC';
 ```
+Be carefull to not commit your token
