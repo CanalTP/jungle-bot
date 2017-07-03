@@ -3,8 +3,8 @@
 
 
 "@broid/messenger@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@broid/messenger/-/messenger-2.0.1.tgz#8ef177d25b5a8c85f9297f4bcb6f5dbad47849dc"
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@broid/messenger/-/messenger-2.0.2.tgz#960d108a1f57fb73eaf4299c902ec93fd00b4515"
   dependencies:
     "@broid/schemas" "^1.0.0"
     "@broid/utils" "^1.1.0"
@@ -27,8 +27,8 @@
     bluebird "^3.4.6"
 
 "@broid/slack@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@broid/slack/-/slack-2.0.1.tgz#48a43d1fcc6db052096ddc578b02ba436509c6ea"
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@broid/slack/-/slack-2.1.0.tgz#8ff804bf1846cc0df1011466d2cd3cbe92b85d70"
   dependencies:
     "@broid/schemas" "^1.0.0"
     "@broid/utils" "^1.1.0"
@@ -44,8 +44,8 @@
     sinon "^2.1.0"
 
 "@broid/utils@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@broid/utils/-/utils-1.1.0.tgz#cba5fdb2ad46082516e6ca11f0bd9d82aa535f5f"
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@broid/utils/-/utils-1.1.1.tgz#b79174c2e6898940a7b5b6c0332b0fe67f4c81ca"
   dependencies:
     bluebird "^3.5.0"
     file-type "^4.1.0"
@@ -762,10 +762,8 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
     delayed-stream "~1.0.0"
 
 commander@^2.8.1:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.10.0.tgz#e1f5d3245de246d1a5ca04702fa1ad1bd7e405fe"
-  dependencies:
-    graceful-readlink ">= 1.0.0"
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -1126,10 +1124,6 @@ globals@^9.0.0:
 graceful-fs@^4.1.2, graceful-fs@^4.1.4:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
-
-"graceful-readlink@>= 1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
 har-schema@^1.0.5:
   version "1.0.5"
@@ -1712,15 +1706,15 @@ read-chunk@^2.0.0:
     pify "^2.3.0"
 
 readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.1.5:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.2.tgz#5a04df05e4f57fe3f0dc68fdd11dc5c97c7e6f4d"
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.3.tgz#368f2512d79f9d46fdfc71349ae7878bbc1eb95c"
   dependencies:
     core-util-is "~1.0.0"
     inherits "~2.0.3"
     isarray "~1.0.0"
     process-nextick-args "~1.0.6"
-    safe-buffer "~5.1.0"
-    string_decoder "~1.0.0"
+    safe-buffer "~5.1.1"
+    string_decoder "~1.0.3"
     util-deprecate "~1.0.1"
 
 readdirp@^2.0.0:
@@ -1849,7 +1843,7 @@ rxjs@^5.0.2, rxjs@^5.4.1:
   dependencies:
     symbol-observable "^1.0.1"
 
-safe-buffer@^5.0.1, safe-buffer@~5.1.0:
+safe-buffer@^5.0.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
@@ -1981,7 +1975,7 @@ string-width@^1.0.1, string-width@^1.0.2:
     is-fullwidth-code-point "^1.0.0"
     strip-ansi "^3.0.0"
 
-string_decoder@~1.0.0:
+string_decoder@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.3.tgz#0fc67d7c141825de94282dd536bec6b9bce860ab"
   dependencies:
