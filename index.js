@@ -3,13 +3,12 @@ import R from 'ramda';
 import BroidSlack from 'broid-slack';
 import { Router } from './lib/router/index.js';
 import {clients} from './lib/clients';
-import {token} from './lib/token';
 
 clients.slack = new BroidSlack({
-    token: token,
+    token: process.env.SLACK_TOKEN,
     http: {
         host: '127.0.0.1',
-        port: process.env.PORT || 8080,
+        port: 8080,
     }
 });
 

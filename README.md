@@ -3,8 +3,11 @@ Robot that can compute journey just for you
 
 ## Add your Slack token
 
-lib/token.js 
+Create file .env
 ```
-export let token = process.env.TOKEN || 'xoxb-YOUR-TOKEN-FROM-SLAC';
+{
+    "slack": {
+        "token": "xoxb-YOUR-TOKEN-FROM-SLACK"
+    }
+}
 ```
-Be carefull to not commit your token
