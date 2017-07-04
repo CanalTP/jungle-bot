@@ -1,7 +1,7 @@
 import Navitia from "../lib/ws/Navitia";
 import JourneysMessageBuilder from "../lib/output/JourneysMessageBuilder";
 
-const navitia = new Navitia('5c60fc34-e017-4c9e-9744-13515c6436d8');
+const navitia = new Navitia();
 
 export default {
     getJourneys: (message, origin, destination, hasJourneysCallback, noJourneyCallback, placeNotFoundCallback) => {

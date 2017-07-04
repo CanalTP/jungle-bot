@@ -8,6 +8,9 @@ Create file .env
 {
     "slack": {
         "token": "xoxb-YOUR-TOKEN-FROM-SLACK"
+    },
+    "navitia": {
+        "token": "XXXXXXXX-XXXXX-XXXX-XXXX-XXXXXXXXXXXX"
     }
 }
 ```

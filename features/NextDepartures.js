@@ -1,7 +1,7 @@
 import DeparturesMessageBuilder from "../lib/output/DeparturesMessageBuilder";
 import Navitia from "../lib/ws/Navitia";
 
-const navitia = new Navitia('5c60fc34-e017-4c9e-9744-13515c6436d8');
+const navitia = new Navitia();
 
 export default {
     getNextDepartures: (message, type, origin, hasNextDeparturesCallback, noScheduleCallback, placeNotFoundCallback) => {
