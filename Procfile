@@ -1,1 +1,1 @@
-worker: npm start
+worker: babel-node index.js
