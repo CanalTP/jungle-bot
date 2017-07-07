@@ -11,6 +11,11 @@ Create file .env
     },
     "navitia": {
         "token": "XXXXXXXX-XXXXX-XXXX-XXXX-XXXXXXXXXXXX"
+    },
+    "wit": {
+        "token": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     }
 }
 ```
+
+/!\ Wit token is optionnal /!\
